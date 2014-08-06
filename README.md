@@ -1,6 +1,6 @@
 SQL IDE based on hotkeys and kinesthetic memory.  
 Project started for easing everyday dummy work in development: showing table description, selecting few fields, sorting and limit output rows.  
-Base idea is: kinesthetic memory is fast, when one use keys without thinking (press "e" and see table description) work flow is really lively.  
+Base idea is: kinesthetic memory is fast, when one use keys without thinking (press **e** and see table description) work flow is really lively.
 *Position of keys is now discussable, I try set it not by key meaning, but by usage frequency.*
 
 **Database connection and other options set in config.py.**
@@ -70,12 +70,12 @@ IV.
 1. After getting result table you can use **l** key for choosing sort column.  
 2. By pressing **r** you can change sort order.  
 
-**P.S. A lot of work in progress:  
+P.S. A lot of work in progress:
 - result table appearance,  
 - result table scan hotkeys,
 - where clause,
-- hint and info windows,  
-- ways for building query with joins and subqueries,  
+- hint and info windows,
+- ways for building query with joins and subqueries,
 - update, delete queries,  
 - fixing batch of bugs.  
-In future I want to add some analyst tools for queries: plots as example.**
+In future I want to add some analyst tools for queries: diagrams as example.
