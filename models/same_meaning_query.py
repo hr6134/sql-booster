@@ -1,3 +1,5 @@
+from _mysql_exceptions import ProgrammingError
+
 from models import connect_db
 
 
@@ -46,6 +48,8 @@ class QueryBuilder(object):
 
     def get_fields(self):
         names = []
+        if not self.__dict__.has_key('from_'):
+            return names
         for i in self.from_.split(', '):
             tmp, names_tmp = QueryBuilder().select_all(i).execute_with_meta()
             for j in range(len(names_tmp)):
@@ -66,7 +70,13 @@ class QueryBuilder(object):
 
     def execute_with_meta(self):
         print self.query
-        self.cursor.execute(self.query)
+        if not self.query:
+            return (), ()
+        try:
+            self.cursor.execute(self.query)
+        except ProgrammingError:
+            print 'Error in query'
+            return (), ()
         meta = []
         for i in self.cursor.description:
             meta.append(i[0])

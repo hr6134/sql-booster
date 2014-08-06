@@ -40,56 +40,46 @@ class InputWindow(object):
             index = self.entry.index('insert')
 
             tmp = self.entry.get()
-            tmp = tmp[0:index - 1] + tmp[index:]
-            self.entry.delete(0, len(self.entry.get()))
-            self.entry.insert(0, tmp)
+            if len(event.keysym) == 1 and ord(event.keysym) > 31 and ord(event.keysym) < 127:
+                tmp = tmp[0:index - 1] + tmp[index:]
+                self.entry.delete(0, len(self.entry.get()))
+                self.entry.insert(0, tmp)
             self.calculate_string_gaps()
 
             if event.keysym == 'k':
                 i = self.string_gaps.index(index - 1)
                 if i < (len(self.string_gaps) - 1):
                     self.entry.icursor(self.string_gaps[i + 1])
+                return
             if event.keysym == 'j':
                 i = self.string_gaps.index(index - 1)
                 if i > 0:
                     self.entry.icursor(self.string_gaps[i - 1])
+                return
 
             # aggregate functions
+            l = tmp.split(', ')
+            try:
+                i = self.string_gaps.index(index - 1)
+            except ValueError:
+                return
+            if i > len(l)-1:
+                return
+
             if event.keysym == 's':
-                l = tmp.split(', ')
-                i = self.string_gaps.index(index - 1)
                 l[i] = 'sum(' + l[i] + ')'
-                tmp = ', '.join(l)
-                self.entry.delete(0, len(self.entry.get()))
-                self.entry.insert(0, tmp)
             if event.keysym == 'c':
-                l = tmp.split(', ')
-                i = self.string_gaps.index(index - 1)
                 l[i] = 'count(' + l[i] + ')'
-                tmp = ', '.join(l)
-                self.entry.delete(0, len(self.entry.get()))
-                self.entry.insert(0, tmp)
             if event.keysym == 'a':
-                l = tmp.split(', ')
-                i = self.string_gaps.index(index - 1)
                 l[i] = 'avg(' + l[i] + ')'
-                tmp = ', '.join(l)
-                self.entry.delete(0, len(self.entry.get()))
-                self.entry.insert(0, tmp)
             if event.keysym == 'd':
-                l = tmp.split(', ')
-                i = self.string_gaps.index(index - 1)
                 l[i] = 'max(' + l[i] + ')'
-                tmp = ', '.join(l)
-                self.entry.delete(0, len(self.entry.get()))
-                self.entry.insert(0, tmp)
             if event.keysym == 'f':
-                l = tmp.split(', ')
-                i = self.string_gaps.index(index - 1)
                 l[i] = 'min(' + l[i] + ')'
-                tmp = ', '.join(l)
-                self.entry.delete(0, len(self.entry.get()))
-                self.entry.insert(0, tmp)
+
+            tmp = ', '.join(l)
+            self.entry.delete(0, len(self.entry.get()))
+            self.entry.insert(0, tmp)
 
     def calculate_string_gaps(self):
         self.string_gaps = []

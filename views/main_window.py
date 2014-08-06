@@ -37,6 +37,8 @@ class MainWindow(object):
             return
 
     def set_data_to_table(self, dct, sortColumn=''):
+        if not dct:
+            return
         self.table.model.createEmptyModel()
         self.table.model.importDict(dct)
         self.table.sortTable(columnName=sortColumn)

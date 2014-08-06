@@ -5,7 +5,7 @@ Base idea is: kinesthetic memory is fast, when one use keys without thinking (pr
 
 **Database connection and other options set in config.py.**
 
-*Current version work only with MySQL. Current version was tested only under Debian, Ubuntu and Mint. Don't work in MacOS because of different tkinter and tkintertable libraries.*
+*Current version work only with MySQL. Current version was tested only under Debian, Ubuntu and Mint. Don't work under MacOS because of different tkinter and tkintertable libraries.*
 
 ####Hotkeys:
 ```
@@ -37,7 +37,7 @@ any "select something" window:
         d: max()
         f: min()
         s: sum()
-    i: change manual and auto mode
+    `: change manual and auto mode
     j: move left
     k: move right
 ```
@@ -70,12 +70,12 @@ IV.
 1. After getting result table you can use **l** key for choosing sort column.  
 2. By pressing **r** you can change sort order.  
 
-P.S. A lot of work in progress:
-- result table appearance,  
-- result table scan hotkeys,
-- where clause,
-- hint and info windows,
-- ways for building query with joins and subqueries,
-- update, delete queries,  
-- fixing batch of bugs.  
-In future I want to add some analyst tools for queries: diagrams as example.
+> A lot of work in progress:
+> - result table appearance,
+> - result table scan hotkeys,
+> - where clause,
+> - hint and info windows,
+> - ways for building query with joins and subqueries,
+> - update, delete queries,
+> - fixing batch of bugs.
+> In future I want to add some analyst tools for queries: diagrams as example.
