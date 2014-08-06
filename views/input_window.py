@@ -15,8 +15,7 @@ class InputWindow(object):
         self.entry.focus()
         self.entry.pack()
 
-        self.manual_input = False
-        # self.manual_input = True
+        self.manual_input = True
         self.string_gaps = []
 
     def add(self, string):
@@ -30,8 +29,12 @@ class InputWindow(object):
         if event.keysym == 'Escape':
             self.window.destroy()
             return
-        if event.keysym == 'i':
+        if event.keysym == 'grave':
+            tmp = self.entry.get().replace('`', '')
+            self.entry.delete(0, len(self.entry.get()))
+            self.entry.insert(0, tmp)
             self.manual_input = not self.manual_input
+            return
 
         if not self.manual_input:
             index = self.entry.index('insert')
@@ -50,7 +53,8 @@ class InputWindow(object):
                 i = self.string_gaps.index(index - 1)
                 if i > 0:
                     self.entry.icursor(self.string_gaps[i - 1])
-                # aggregate functions
+
+            # aggregate functions
             if event.keysym == 's':
                 l = tmp.split(', ')
                 i = self.string_gaps.index(index - 1)
