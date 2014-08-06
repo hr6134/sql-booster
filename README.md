@@ -43,12 +43,12 @@ any "select something" window:
 ```
 
 ####Examples: 
-I.  
+**I.**
 1. Press **d** key.  
 2. Choose table using **j** and **k** keys for movement and **space** key for selecting. Also you can use filter string.  
 3. Press **a** key for submit.
 
-II.  
+**II.**
 1. Press **f** key.  
 2. Choose table using **j** and **k** keys for movement and **space** key for selecting.
 3. Press **a** key for submit.  
@@ -57,7 +57,7 @@ II.
 6. Press **a** key for submit.  
 7. Press **a** key for execution built query.  
 
-III.  
+**III.**
 1. Make same steps as in II example. But now choose table and fields that you can use in group by.  
 2. Press **o**.  
 3. Choose field(s) for group by section.  
@@ -66,7 +66,7 @@ III.
 6. Press **enter**.  
 7. Press **a**.  
 
-IV.  
+**IV.**
 1. After getting result table you can use **l** key for choosing sort column.  
 2. By pressing **r** you can change sort order.  
 

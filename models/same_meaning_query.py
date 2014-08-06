@@ -75,6 +75,7 @@ class QueryBuilder(object):
         try:
             self.cursor.execute(self.query)
         except ProgrammingError:
+            # TODO in next version display error in interface
             print 'Error in query'
             return (), ()
         meta = []
