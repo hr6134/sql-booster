@@ -38,8 +38,8 @@ any "select something" window:
         f: min()
         s: sum()
     `: change manual and auto mode
-    j: move left
-    k: move right
+    ctrl+j: move left
+    ctrl+k: move right
 ```
 
 ####Examples: 
