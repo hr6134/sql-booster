@@ -40,6 +40,8 @@ any "select something" window:
     `: change manual and auto mode
     ctrl+j: move left
     ctrl+k: move right
+    ctrl+d: insert 'and', replace if caret standing before 'or'
+    ctrl+f: insert 'or', replace if caret standing before 'and'
 ```
 
 ####Examples: 

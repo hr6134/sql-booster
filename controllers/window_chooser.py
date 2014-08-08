@@ -118,7 +118,7 @@ class WindowChooser(object):
 
             if len(diff) > 0:
                 print 'diff not null'
-                view = input_window.InputWindow(self)
+                view = input_window.InputWindow(self, manual_input=False)
                 view.add(', '.join(diff))
                 view.calculate_string_gaps()
                 self.view_type = ViewTypeLabels.AGGREGATE

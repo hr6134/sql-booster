@@ -18,6 +18,8 @@ class InputWindow(object):
         self.entry.bind('<KeyPress>', self.key)
         self.entry.bind('<Control-k>', self.move_right)
         self.entry.bind('<Control-j>', self.move_left)
+        self.entry.bind('<Control-d>', self.insert_and)
+        self.entry.bind('<Control-f>', self.insert_or)
 
         self.entry['width'] = 100
         self.entry.focus()
@@ -43,6 +45,30 @@ class InputWindow(object):
         i = self.string_gaps.index(index)
         if i > 0:
             self.entry.icursor(self.string_gaps[i - 1])
+        return 'break'
+
+    def insert_or(self, event):
+        index = self.entry.index('insert')
+        splited = self.entry.get()[index:].split()
+        if splited and splited[0] == 'and':
+            tmp = 'or' + self.entry.get()[index+3:]
+            self.entry.delete(index, len(self.entry.get()))
+            self.entry.insert(index, tmp)
+        else:
+            self.entry.insert(index, 'or')
+        self.entry.icursor(index)
+        return 'break'
+
+    def insert_and(self, event):
+        index = self.entry.index('insert')
+        splited = self.entry.get()[index:].split()
+        if splited and splited[0] == 'or':
+            tmp = 'and' + self.entry.get()[index+2:]
+            self.entry.delete(index, len(self.entry.get()))
+            self.entry.insert(index, tmp)
+        else:
+            self.entry.insert(index, 'and')
+        self.entry.icursor(index)
         return 'break'
 
     def key(self, event):
