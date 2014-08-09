@@ -36,6 +36,7 @@ class WindowChooser(object):
                      'u': self.pure_query,
                      'i': self.select_select,
                      'a': self.execute_query,
+                     'w': self.where_select,
                      'x': self.limit_select}
         # mainloop must be the last method in init
         self.main_win.window.mainloop()
@@ -117,9 +118,30 @@ class WindowChooser(object):
             self.query_builder.set_select(select_tpl)
 
             if len(diff) > 0:
-                print 'diff not null'
                 view = input_window.InputWindow(self, manual_input=False)
                 view.add(', '.join(diff))
+                view.calculate_string_gaps()
+                self.view_type = ViewTypeLabels.AGGREGATE
+
+            self.main_win.label_value = self.query_builder.get_query_for_label()
+            return
+
+        if self.view_type == ViewTypeLabels.WHERE_SELECT:
+            tmp = []
+            for i in data.curselection():
+                tmp.append(data.get(i))
+            self.query_builder.set_group_by(tmp)
+            print tmp
+            where_str = ''
+            for i in tmp:
+                where_str += i + ' = and '
+            where_str = where_str[:-5]
+
+            self.query_builder.set_where(where_str)
+
+            if len(where_str) > 0:
+                view = input_window.InputWindow(self, manual_input=False)
+                view.add(where_str)
                 view.calculate_string_gaps()
                 self.view_type = ViewTypeLabels.AGGREGATE
 
@@ -171,6 +193,13 @@ class WindowChooser(object):
         self.query_result = self.query_builder.select_part[7:].split(', ')
         view.add(self.query_result)
         self.key_sequence.append('o')
+
+    def where_select(self):
+        self.view_type = ViewTypeLabels.WHERE_SELECT
+        view = search_table.SearchTableView(self)
+        self.query_result = self.query_builder.get_fields()
+        view.add(self.query_result)
+        self.key_sequence.append('w')
 
     def reverse_sorting(self):
         self.main_win.sort_table(self.sort_column)

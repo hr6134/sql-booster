@@ -38,6 +38,10 @@ class QueryBuilder(object):
         self.select_part = 'select ' + ', '.join(select) + ' '
         return self
 
+    def set_where(self, where):
+        self.where_part = 'where ' + where
+        return self
+
     def set_limit(self, limit):
         self.limit_part = ' limit ' + limit
         return self
