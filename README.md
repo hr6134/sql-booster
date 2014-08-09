@@ -42,6 +42,7 @@ any "select something" window:
     ctrl+k: move right
     ctrl+d: insert 'and', replace if caret standing before 'or'
     ctrl+f: insert 'or', replace if caret standing before 'and'
+    ctrl+s: insert 'like', replace if caret standing before '=', '>' or '<'
 ```
 
 ####Examples: 

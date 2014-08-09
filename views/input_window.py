@@ -20,6 +20,7 @@ class InputWindow(object):
         self.entry.bind('<Control-j>', self.move_left)
         self.entry.bind('<Control-d>', self.insert_and)
         self.entry.bind('<Control-f>', self.insert_or)
+        self.entry.bind('<Control-s>', self.insert_like)
 
         self.entry['width'] = 100
         self.entry.focus()
@@ -68,6 +69,18 @@ class InputWindow(object):
             self.entry.insert(index, tmp)
         else:
             self.entry.insert(index, 'and')
+        self.entry.icursor(index)
+        return 'break'
+
+    def insert_like(self, event):
+        index = self.entry.index('insert')
+        splited = self.entry.get()[index:].split()
+        if splited and splited[0] in ('=', '>', '<'):
+            tmp = 'like' + self.entry.get()[index+1:]
+            self.entry.delete(index, len(self.entry.get()))
+            self.entry.insert(index, tmp)
+        else:
+            self.entry.insert(index, 'like')
         self.entry.icursor(index)
         return 'break'
 
