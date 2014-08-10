@@ -38,6 +38,7 @@ class WindowChooser(object):
                      'i': self.select_select,
                      'a': self.execute_query,
                      'w': self.where_select,
+                     'z': self.clear_query,
                      'x': self.limit_select}
         # mainloop must be the last method in init
         self.main_win.window.mainloop()
@@ -227,3 +228,6 @@ class WindowChooser(object):
         self.view_type = ViewTypeLabels.LIMIT_SELECT
         input_window.InputWindow(self)
         self.key_sequence.append('x')
+
+    def clear_query(self):
+        self.query_builder.clear_query()

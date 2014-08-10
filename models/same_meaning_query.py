@@ -87,3 +87,14 @@ class QueryBuilder(object):
 
     def get_query_for_label(self):
         return self.select_part + self.from_part + self.where_part + self.group_by_part
+
+    def clear_query(self):
+        self.query = ''
+        self.from_part = ''
+        self.select_part = ''
+        self.where_part = ''
+        self.group_by_part = ''
+        self.limit_part = ''
+
+        # TODO move to information string in future
+        print 'Query cleared'
