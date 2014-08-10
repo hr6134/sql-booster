@@ -39,7 +39,7 @@ class QueryBuilder(object):
         return self
 
     def set_where(self, where):
-        self.where_part = 'where ' + where
+        self.where_part = ' where ' + where
         return self
 
     def set_limit(self, limit):
@@ -68,12 +68,10 @@ class QueryBuilder(object):
         return self
 
     def execute(self):
-        print self.query
         self.cursor.execute(self.query)
         return self.cursor.fetchall()
 
     def execute_with_meta(self):
-        print self.query
         if not self.query:
             return (), ()
         try:

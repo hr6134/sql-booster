@@ -58,4 +58,3 @@ class SearchTableView(object):
                 self.entry.delete(0, len(self.entry.get()))
                 self.entry.insert(0, tmp[:-1])
                 self.filter_list(event)
-                print('\a')

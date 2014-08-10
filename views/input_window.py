@@ -126,8 +126,6 @@ class InputWindow(object):
     def calculate_string_gaps(self):
         self.string_gaps = []
         tmp = self.entry.get()
-        print tmp
-        print tmp.split(' ')
 
         n = 0
         self.string_gaps.append(0)
@@ -136,5 +134,4 @@ class InputWindow(object):
             self.string_gaps.append(n)
         self.string_gaps[-1] = self.string_gaps[-1] - 1
 
-        print self.string_gaps
         self.string_gaps.append(len(tmp))

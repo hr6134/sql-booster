@@ -18,6 +18,7 @@ class ViewTypeLabels(object):
     LIMIT_SELECT = 7
     GROUP_BY = 8
     AGGREGATE = 9
+    WHERE_SELECT_SUBMIT = 10
 
 
 class WindowChooser(object):
@@ -63,7 +64,6 @@ class WindowChooser(object):
             self.query_builder.set_from(tmp)
 
             self.main_win.label_value = self.query_builder.get_query_for_label()
-            print self.main_win.label_value
             self.main_win.window.update_idletasks()
             return
 
@@ -130,27 +130,27 @@ class WindowChooser(object):
             tmp = []
             for i in data.curselection():
                 tmp.append(data.get(i))
-            self.query_builder.set_group_by(tmp)
-            print tmp
+
             where_str = ''
             for i in tmp:
                 where_str += i + ' = and '
             where_str = where_str[:-5]
 
-            self.query_builder.set_where(where_str)
-
             if len(where_str) > 0:
-                view = input_window.InputWindow(self, manual_input=False)
+                view = input_window.InputWindow(self, manual_input=True)
                 view.add(where_str)
                 view.calculate_string_gaps()
-                self.view_type = ViewTypeLabels.AGGREGATE
+                self.view_type = ViewTypeLabels.WHERE_SELECT_SUBMIT
 
             self.main_win.label_value = self.query_builder.get_query_for_label()
             return
 
+        if self.view_type == ViewTypeLabels.WHERE_SELECT_SUBMIT:
+            self.query_builder.set_where(data)
+            return
+
         if self.view_type == ViewTypeLabels.AGGREGATE:
             self.query_builder.select_part = self.query_builder.select_part + ', ' + data
-            print self.query_builder.build_query().query
             return
 
     # different select methods
