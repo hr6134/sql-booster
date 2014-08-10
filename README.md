@@ -11,6 +11,7 @@ Base idea is: kinesthetic memory is fast, when one use keys without thinking (pr
 ```
 "main" window:
     a: execute query
+    c: clear from memory current query
     d: default select
     e: show description of a table
     f: select from table
@@ -20,6 +21,7 @@ Base idea is: kinesthetic memory is fast, when one use keys without thinking (pr
     r: change sort order
     s: show tables
     u: totally manual query
+    w: add where clause
     x: limit select
     esc: close window
 
@@ -30,14 +32,14 @@ any "select something" window:
     k: move cursor up
     space: select current row
 
-"write text" window:
+"input text" window:
     wrap field by:
         a: avg()
         c: count()
         d: max()
         f: min()
         s: sum()
-    `: change manual and auto mode
+    `: change manual and auto mode (default mode changes from clause to clause)
     ctrl+j: move left
     ctrl+k: move right
     ctrl+d: insert 'and', replace if caret standing before 'or'
@@ -76,7 +78,6 @@ any "select something" window:
 > A lot of work in progress:
 > - result table appearance,
 > - result table scan hotkeys,
-> - where clause,
 > - hint and info windows,
 > - ways for building query with joins and subqueries,
 > - update, delete queries,
