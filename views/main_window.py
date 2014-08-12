@@ -19,8 +19,7 @@ class MainWindow(object):
         self.label = Label(self.frame, textvariable=self.label_value, anchor=NW, justify=CENTER, wraplength=398)
         # don't mix grid and pack
         self.label.grid(row=0)
-        self.table = TableCanvas(self.frame, cols=0, rows=0)
-        self.table.__dict__['editable'] = False
+        self.table = TableCanvas(self.frame, cols=0, rows=0, editable=False)
         self.table.createTableFrame()
 
         self.sort_order = 0
