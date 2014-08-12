@@ -24,6 +24,10 @@ Base idea is: kinesthetic memory is fast, when one use keys without thinking (pr
     w: add where clause
     x: limit select
     esc: close window
+    ctrl+j: move cursor up
+    ctrl+k: move cursor down
+    ctrl+l: move cursor left
+    ctrl+;: move cursor right
 
 any "select something" window:
     a: accept selected rows
@@ -77,7 +81,6 @@ any "select something" window:
 
 > A lot of work in progress:
 > - result table appearance,
-> - result table scan hotkeys,
 > - hint and info windows,
 > - ways for building query with joins and subqueries,
 > - update, delete queries,

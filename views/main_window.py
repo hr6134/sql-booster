@@ -20,6 +20,12 @@ class MainWindow(object):
         # don't mix grid and pack
         self.label.grid(row=0)
         self.table = TableCanvas(self.frame, cols=0, rows=0, editable=False)
+
+        self.table.parentframe.master.bind_all("<Control-j>", self.move_cursor_up)
+        self.table.parentframe.master.bind_all("<Control-k>", self.move_cursor_down)
+        self.table.parentframe.master.bind_all("<Control-l>", self.move_cursor_left)
+        self.table.parentframe.master.bind_all("<Control-semicolon>", self.move_cursor_right)
+
         self.table.createTableFrame()
 
         self.sort_order = 0
@@ -50,3 +56,63 @@ class MainWindow(object):
             self.sort_order = 1
         else:
             self.sort_order = 0
+
+    def move_cursor_up(self, event):
+        x,y = self.table.getCanvasPos(self.table.currentrow, 0)
+        if x == None:
+            return
+
+        if self.table.currentrow == 0:
+            return
+        else:
+            self.table.currentrow = self.table.currentrow -1
+
+        self.draw_table_cursor()
+        return
+
+    def move_cursor_down(self, event):
+        x,y = self.table.getCanvasPos(self.table.currentrow, 0)
+        if x == None:
+            return
+
+        if self.table.currentrow >= self.table.rows-1:
+            return
+        else:
+            self.table.currentrow = self.table.currentrow +1
+
+        self.draw_table_cursor()
+        return
+
+    def move_cursor_left(self, event):
+        x,y = self.table.getCanvasPos(self.table.currentrow, 0)
+        if x == None:
+            return
+
+        self.table.currentcol  = self.table.currentcol -1
+
+        self.draw_table_cursor()
+        return
+
+    def move_cursor_right(self, event):
+        x,y = self.table.getCanvasPos(self.table.currentrow, 0)
+        if x == None:
+            return
+
+        if self.table.currentcol >= self.table.cols-1:
+            if self.table.currentrow < self.table.rows-1:
+                self.table.currentcol = 0
+                self.table.currentrow  = self.table.currentrow +1
+            else:
+                return
+        else:
+            self.table.currentcol  = self.table.currentcol +1
+
+        self.draw_table_cursor()
+        return
+
+    def draw_table_cursor(self):
+        self.table.drawSelectedRect(self.table.currentrow, self.table.currentcol)
+        coltype = self.table.model.getColumnType(self.table.currentcol)
+        if coltype == 'text' or coltype == 'number':
+            self.table.delete('entry')
+            self.table.drawCellEntry(self.table.currentrow, self.table.currentcol)
