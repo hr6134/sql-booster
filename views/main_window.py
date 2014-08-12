@@ -20,6 +20,7 @@ class MainWindow(object):
         # don't mix grid and pack
         self.label.grid(row=0)
         self.table = TableCanvas(self.frame, cols=0, rows=0)
+        self.table.__dict__['editable'] = False
         self.table.createTableFrame()
 
         self.sort_order = 0
